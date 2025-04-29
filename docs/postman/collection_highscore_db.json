@@ -1,0 +1,99 @@
+{
+    "info": {
+        "_postman_id": "fb98ce59-adc6-4e32-88cc-34e69708d45b",
+        "name": "highscore_db",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": ""
+    },
+    "item": [
+        {
+            "name": "GET Highscore Top 10",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:3000/highscore/dd4d1a46-03aa-4224-bdfd-39bcabe874ed/top/5",
+                    "path": [
+                        "highscore",
+                        "dd4d1a46-03aa-4224-bdfd-39bcabe874ed",
+                        "top",
+                        "5"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000"
+                }
+            }
+        },
+        {
+            "name": "POST New game",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "http://localhost:3000/games",
+                    "path": [
+                        "games"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000"
+                },
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n  \"gameName\": \"Judgement Day Harkens\"\n}"
+                }
+            }
+        },
+        {
+            "name": "POST Highscore",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "http://localhost:3000/highscore",
+                    "path": [
+                        "highscore"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000"
+                },
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n  \"date\": \"01-07-2025\",\n  \"initials\": \"AJB\",\n  \"gameId\": \"dd4d1a46-03aa-4224-bdfd-39bcabe874ed\",\n  \"score\": 6000\n}"
+                }
+            }
+        },
+        {
+            "name": "GET All games",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:3000/games",
+                    "path": [
+                        "games"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000"
+                }
+            }
+        }
+    ]
+}
