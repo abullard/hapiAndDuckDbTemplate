@@ -21,10 +21,10 @@ describe('games.service', () => {
             expect(mockExecuteQuery).toHaveBeenCalledWith('SELECT * FROM games;');
         });
 
-        it('should throw an error when it fails to execute the query', () => {
+        it('should throw an error when it fails to execute the query', async () => {
             mockExecuteQuery.mockRejectedValue(new Error("Records could not be read"));
 
-            expect(getAllGames()).rejects.toThrow();
+            await expect(getAllGames()).rejects.toThrow();
         });
     });
 
@@ -45,10 +45,10 @@ describe('games.service', () => {
             expect(actual).toEqual(gameId);
         });
 
-        it('should throw an error when it fails to execute the query', () => {
+        it('should throw an error when it fails to execute the query', async () => {
             mockExecuteQuery.mockRejectedValue(new Error("Records could not be read"));
 
-            expect(getAllGames()).rejects.toThrow();
+            await expect(getAllGames()).rejects.toThrow();
         });
     });
 });

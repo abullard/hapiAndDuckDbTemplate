@@ -23,10 +23,10 @@ describe('highscore.service', () => {
             expect(mockExecuteQuery).toHaveBeenCalledWith(expect.stringContaining('SELECT * FROM highscore'));
         });
 
-        it('should throw an error when it fails to execute the query', () => {
+        it('should throw an error when it fails to execute the query', async () => {
             mockExecuteQuery.mockRejectedValue(new Error("Records could not be read"));
 
-            expect(getTopNByGame(chance.guid(), 5)).rejects.toThrow();
+            await expect(getTopNByGame(chance.guid(), 5)).rejects.toThrow();
         });
     });
 
@@ -50,10 +50,10 @@ describe('highscore.service', () => {
             expect(actual).toEqual(gameId);
         });
 
-        it('should throw an error when it fails to execute the query', () => {
+        it('should throw an error when it fails to execute the query', async () => {
             mockExecuteQuery.mockRejectedValue(new Error("Records could not be read"));
 
-            expect(postNewHighscore(payload)).rejects.toThrow();
+            await expect(postNewHighscore(payload)).rejects.toThrow();
         });
     });
 });

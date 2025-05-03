@@ -27,10 +27,10 @@ describe('games.handler', () => {
             expect(actual).toEqual(mappedGames);
         });
 
-        it('should throw an error when failing to exec DB query', () => {
+        it('should throw an error when failing to exec DB query', async () => {
             mockGetAllGames.mockRejectedValue(new Error("Records could not be read"));
 
-            expect(getAllGamesHandler()).rejects.toThrow();
+            await expect(getAllGamesHandler()).rejects.toThrow();
         });
     });
 
@@ -55,10 +55,10 @@ describe('games.handler', () => {
             expect(actual).toEqual(gameId);
         });
 
-        it('should throw an error when failing to exec DB query', () => {
+        it('should throw an error when failing to exec DB query', async () => {
             mockPostNewGame.mockRejectedValue(new Error("Record not inserted"));
 
-            expect(postNewGameHandler(request, h)).rejects.toThrow();
+            await expect(postNewGameHandler(request, h)).rejects.toThrow();
         });
     });
 });

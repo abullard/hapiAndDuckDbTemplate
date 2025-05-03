@@ -1,12 +1,13 @@
 import { DuckDBConnection } from '@duckdb/node-api';
 import { getConnection } from '../../services/database';
+import { describe, it, expect } from 'vitest';
 
 describe('database fn(getConnection) failure', () => {
     it('should throw an error when failing to connect', async () => {
         const failingConnectionString = 'blah////';
 
         const suppliedPath = failingConnectionString;
-        expect(getConnection(suppliedPath)).rejects.toThrow();
+        await expect(getConnection(suppliedPath)).rejects.toThrow();
     });
 });
 

@@ -48,10 +48,10 @@ describe('highscore.handler', () => {
             expect(actual).toEqual(mappedHighscores);
         });
 
-        it('should throw an error when failing to exec DB query', () => {
+        it('should throw an error when failing to exec DB query', async () => {
             mockGetTopNByGame.mockRejectedValue(new Error('Records could not be read'));
 
-            expect(getTopNByGameHandler(request, h)).rejects.toThrow();
+            await expect(getTopNByGameHandler(request, h)).rejects.toThrow();
         });
     });
 
@@ -65,10 +65,10 @@ describe('highscore.handler', () => {
             expect(actual).toEqual(scoreId);
         });
 
-        it('should throw an error when failing to exec DB query', () => {
+        it('should throw an error when failing to exec DB query', async () => {
             mockPostNewHighscore.mockRejectedValue(new Error("Record not inserted"));
 
-            expect(postNewHighscoreHandler(request, h)).rejects.toThrow();
+            await expect(postNewHighscoreHandler(request, h)).rejects.toThrow();
         });
     });
 });
