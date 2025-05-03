@@ -4,13 +4,14 @@ import { mapToGame } from "../../mappers/games.mapper";
 import { Game } from "../../types/interfaces";
 import { chance } from "../setupChance";
 import { Request, ResponseToolkit } from "@hapi/hapi";
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 
-jest.mock("../../services/games.service");
-jest.mock("../../mappers/games.mapper");
+vi.mock("../../services/games.service");
+vi.mock("../../mappers/games.mapper");
 
-const mockGetAllGames = jest.mocked(getAllGames);
-const mockPostNewGame = jest.mocked(postNewGame);
-const mockMapToGame = jest.mocked(mapToGame);
+const mockGetAllGames = vi.mocked(getAllGames);
+const mockPostNewGame = vi.mocked(postNewGame);
+const mockMapToGame = vi.mocked(mapToGame);
 
 describe('games.handler', () => {
     describe('fn(getAllGames)', () => {
@@ -26,10 +27,10 @@ describe('games.handler', () => {
             expect(actual).toEqual(mappedGames);
         });
 
-        it('should throw an error when failing to exec DB query', () => {
+        it('should throw an error when failing to exec DB query', async () => {
             mockGetAllGames.mockRejectedValue(new Error("Records could not be read"));
 
-            expect(getAllGamesHandler()).rejects.toThrow();
+            await expect(getAllGamesHandler()).rejects.toThrow();
         });
     });
 
@@ -37,7 +38,7 @@ describe('games.handler', () => {
         let request: Request;
         let h: ResponseToolkit;
         let gameId: string;
-        
+
         beforeEach(() => {
             request = {
                 payload: 'bogus'
@@ -54,10 +55,10 @@ describe('games.handler', () => {
             expect(actual).toEqual(gameId);
         });
 
-        it('should throw an error when failing to exec DB query', () => {
+        it('should throw an error when failing to exec DB query', async () => {
             mockPostNewGame.mockRejectedValue(new Error("Record not inserted"));
 
-            expect(postNewGameHandler(request, h)).rejects.toThrow();
+            await expect(postNewGameHandler(request, h)).rejects.toThrow();
         });
     });
 });

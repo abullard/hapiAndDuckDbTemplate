@@ -2,13 +2,14 @@ import { executeQuery } from '../../services/database';
 import { getTopNByGame, postNewHighscore } from '../../services/highscore.service';
 import { chance } from '../setupChance';
 import { v4 as guid } from 'uuid';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 
-jest.mock("../../services/database");
-jest.mock('uuid', () => ({
-    v4: jest.fn(),
+vi.mock("../../services/database");
+vi.mock('uuid', () => ({
+    v4: vi.fn(),
 }));
 
-const mockExecuteQuery = jest.mocked(executeQuery);
+const mockExecuteQuery = vi.mocked(executeQuery);
 
 describe('highscore.service', () => {
     describe('fn(getTopNByGame)', () => {
@@ -22,10 +23,10 @@ describe('highscore.service', () => {
             expect(mockExecuteQuery).toHaveBeenCalledWith(expect.stringContaining('SELECT * FROM highscore'));
         });
 
-        it('should throw an error when it fails to execute the query', () => {
+        it('should throw an error when it fails to execute the query', async () => {
             mockExecuteQuery.mockRejectedValue(new Error("Records could not be read"));
 
-            expect(getTopNByGame(chance.guid(), 5)).rejects.toThrow();
+            await expect(getTopNByGame(chance.guid(), 5)).rejects.toThrow();
         });
     });
 
@@ -34,7 +35,7 @@ describe('highscore.service', () => {
         let gameId = chance.guid();
 
         beforeEach(() => {
-            (guid as jest.Mock).mockImplementation(() => gameId);
+            (guid as vi.Mock).mockImplementation(() => gameId);
             payload = chance.highscore();
             payload.scoreId = null;
         });
@@ -49,10 +50,10 @@ describe('highscore.service', () => {
             expect(actual).toEqual(gameId);
         });
 
-        it('should throw an error when it fails to execute the query', () => {
+        it('should throw an error when it fails to execute the query', async () => {
             mockExecuteQuery.mockRejectedValue(new Error("Records could not be read"));
 
-            expect(postNewHighscore(payload)).rejects.toThrow();
+            await expect(postNewHighscore(payload)).rejects.toThrow();
         });
     });
 });

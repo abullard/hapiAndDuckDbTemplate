@@ -4,7 +4,7 @@ import path from 'path';
 let connection: DuckDBConnection;
 
 export const getConnection = async (suppliedPath?: string): Promise<DuckDBConnection> => {
-    const dbPath = path.join('C:', 'Arcade', 'duckdb', 'highscore.duckdb');
+    const dbPath = path.join('/', 'root', 'Developer', 'database', 'basic.duckdb');
 
     if (!connection) {
         try {

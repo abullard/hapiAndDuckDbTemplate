@@ -5,13 +5,14 @@ import { Highscore } from "../../types/interfaces";
 import { chance } from "../setupChance";
 import { DuckDBValue } from "@duckdb/node-api";
 import { Request, ResponseToolkit } from "@hapi/hapi";
+import { vi, describe, beforeEach, it, expect } from 'vitest';
 
-jest.mock("../../services/highscore.service");
-jest.mock("../../mappers/highscore.mapper");
+vi.mock("../../services/highscore.service");
+vi.mock("../../mappers/highscore.mapper");
 
-const mockGetTopNByGame = jest.mocked(getTopNByGame);
-const mockMapToHighscore = jest.mocked(mapToHighscore);
-const mockPostNewHighscore = jest.mocked(postNewHighscore);
+const mockGetTopNByGame = vi.mocked(getTopNByGame);
+const mockMapToHighscore = vi.mocked(mapToHighscore);
+const mockPostNewHighscore = vi.mocked(postNewHighscore);
 
 describe('highscore.handler', () => {
     let request: Request;
@@ -47,10 +48,10 @@ describe('highscore.handler', () => {
             expect(actual).toEqual(mappedHighscores);
         });
 
-        it('should throw an error when failing to exec DB query', () => {
+        it('should throw an error when failing to exec DB query', async () => {
             mockGetTopNByGame.mockRejectedValue(new Error('Records could not be read'));
 
-            expect(getTopNByGameHandler(request, h)).rejects.toThrow();
+            await expect(getTopNByGameHandler(request, h)).rejects.toThrow();
         });
     });
 
@@ -64,10 +65,10 @@ describe('highscore.handler', () => {
             expect(actual).toEqual(scoreId);
         });
 
-        it('should throw an error when failing to exec DB query', () => {
+        it('should throw an error when failing to exec DB query', async () => {
             mockPostNewHighscore.mockRejectedValue(new Error("Record not inserted"));
 
-            expect(postNewHighscoreHandler(request, h)).rejects.toThrow();
+            await expect(postNewHighscoreHandler(request, h)).rejects.toThrow();
         });
     });
 });

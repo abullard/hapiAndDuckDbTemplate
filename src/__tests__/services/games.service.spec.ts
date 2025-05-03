@@ -2,13 +2,14 @@ import { executeQuery } from '../../services/database';
 import { getAllGames, postNewGame } from '../../services/games.service';
 import { chance } from '../setupChance';
 import { v4 as guid } from 'uuid';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 
-jest.mock("../../services/database");
-jest.mock('uuid', () => ({
-    v4: jest.fn(),
+vi.mock("../../services/database");
+vi.mock('uuid', () => ({
+    v4: vi.fn(),
 }));
 
-const mockExecuteQuery = jest.mocked(executeQuery);
+const mockExecuteQuery = vi.mocked(executeQuery);
 
 describe('games.service', () => {
     describe('fn(getAllGames)', () => {
@@ -20,10 +21,10 @@ describe('games.service', () => {
             expect(mockExecuteQuery).toHaveBeenCalledWith('SELECT * FROM games;');
         });
 
-        it('should throw an error when it fails to execute the query', () => {
+        it('should throw an error when it fails to execute the query', async () => {
             mockExecuteQuery.mockRejectedValue(new Error("Records could not be read"));
 
-            expect(getAllGames()).rejects.toThrow();
+            await expect(getAllGames()).rejects.toThrow();
         });
     });
 
@@ -31,7 +32,7 @@ describe('games.service', () => {
         let gameId = chance.guid();
 
         beforeEach(() => {
-            (guid as jest.Mock).mockImplementation(() => gameId);
+            (guid as vi.Mock).mockImplementation(() => gameId);
         });
 
         it('should execute the query and return the new gameId', async () => {
@@ -44,10 +45,10 @@ describe('games.service', () => {
             expect(actual).toEqual(gameId);
         });
 
-        it('should throw an error when it fails to execute the query', () => {
+        it('should throw an error when it fails to execute the query', async () => {
             mockExecuteQuery.mockRejectedValue(new Error("Records could not be read"));
 
-            expect(getAllGames()).rejects.toThrow();
+            await expect(getAllGames()).rejects.toThrow();
         });
     });
 });
