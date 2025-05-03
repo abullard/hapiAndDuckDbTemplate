@@ -11,7 +11,8 @@
         "moduleResolution": "node",
         "esModuleInterop": true,
         "skipLibCheck": true,
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "types": ["vitest"]
     },
     "exclude": [
         "./src/__tests__/**/*",

@@ -2,13 +2,14 @@ import { executeQuery } from '../../services/database';
 import { getAllGames, postNewGame } from '../../services/games.service';
 import { chance } from '../setupChance';
 import { v4 as guid } from 'uuid';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 
-jest.mock("../../services/database");
-jest.mock('uuid', () => ({
-    v4: jest.fn(),
+vi.mock("../../services/database");
+vi.mock('uuid', () => ({
+    v4: vi.fn(),
 }));
 
-const mockExecuteQuery = jest.mocked(executeQuery);
+const mockExecuteQuery = vi.mocked(executeQuery);
 
 describe('games.service', () => {
     describe('fn(getAllGames)', () => {
@@ -31,7 +32,7 @@ describe('games.service', () => {
         let gameId = chance.guid();
 
         beforeEach(() => {
-            (guid as jest.Mock).mockImplementation(() => gameId);
+            (guid as vi.Mock).mockImplementation(() => gameId);
         });
 
         it('should execute the query and return the new gameId', async () => {
