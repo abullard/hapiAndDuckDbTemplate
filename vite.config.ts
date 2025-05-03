@@ -9,10 +9,10 @@ export default defineConfig({
     },
     outDir: 'dist',
     rollupOptions: {
-      external: [],
+      external: ['@hapi/hapi', '@duckdb/node-api', 'path'],
     },
     emptyOutDir: true,
     target: 'node20',
-    minify: true,
+    minify: false,
   }
 });

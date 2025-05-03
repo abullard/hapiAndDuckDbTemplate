@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "init:db": "pnpm ci && pnpm run build",
-    "start": "vite ./dist/index.js",
+    "start": "node ./dist/index.js",
     "start:debug": "npx nodemon -e ts --exec \"pnpm run build; pnpm start\"",
-    "build": "vite build", 
+    "build": "vite build",
     "start-db:session": "duckdb ./highscore_database/database/highscore.duckdb",
     "clean:nix": "rm -rf ./dist",
     "clean:win": "rmdir dist /s /q && rmdir node_modules /s /q",
@@ -27,6 +27,7 @@
     "nodemon": "3.1.9",
     "ts-node": "10.9.2",
     "typescript": "5.7.2",
+    "typescript-eslint": "^8.31.1",
     "vite": "6.3.4",
     "vitest": "3.1.2"
   }
