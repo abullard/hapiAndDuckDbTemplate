@@ -2,3 +2,5 @@
 /dist
 
 database/highscore.duckdb.wal
+
+*:Zone.Identifier
