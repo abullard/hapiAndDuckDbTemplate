@@ -1,11 +1,13 @@
 {
-  "name": "highscore-database",
+  "name": "trellis",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "init:db": "pnpm ci && pnpm run build",
-    "start": "node ./dist/index.js",
-    "start:debug": "npx nodemon -e ts --exec \"pnpm run build; pnpm start\"",
+    "start:client": "",
+    "start:client:debug": "",
+    "start:server": "node ./dist/server/index.js",
+    "start:server:debug": "npx nodemon -e ts --exec \"pnpm build; pnpm start:server\"",
     "build": "vite build",
     "start-db:session": "duckdb ./highscore_database/database/highscore.duckdb",
     "clean:nix": "rm -rf ./dist",

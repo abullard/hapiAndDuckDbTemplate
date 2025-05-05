@@ -1,11 +1,14 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+  // TODO (ajb): Need to add client build for vue
+
+  // server build
   build: {
     lib: {
-      entry: './src/index.ts',
+      entry: './src/server/index.ts',
       formats: ['cjs'],
-      fileName: () => 'index.js',
+      fileName: () => 'server/index.js',
     },
     outDir: 'dist',
     rollupOptions: {

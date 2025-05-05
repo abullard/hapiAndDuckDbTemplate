@@ -15,7 +15,8 @@
         "types": ["vitest"]
     },
     "exclude": [
-        "./src/__tests__/**/*",
+        "src/server/__tests__/**/*",
+        "src/client/__tests__/**/*",
         "node_modules"
     ]
 }
