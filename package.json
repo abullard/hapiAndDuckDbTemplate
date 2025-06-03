@@ -3,17 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "init:db": "pnpm ci && pnpm run build",
     "start:client": "",
     "start:client:debug": "",
     "start:server": "node ./dist/server/index.js",
     "start:server:debug": "npx nodemon -e ts --exec \"pnpm build; pnpm start:server\"",
-    "build": "vite build",
-    "start-db:session": "duckdb ./highscore_database/database/highscore.duckdb",
-    "clean:nix": "rm -rf ./dist",
-    "clean:win": "rmdir dist /s /q && rmdir node_modules /s /q",
+    "build": "pnpm i && vite build",
+    "start-db:cli": "duckdb /root/Developer/database/trellis.duckdb",
+    "clean": "rm -rf ./dist node_modules",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage"
+  },
+  "scriptDescriptions": {
+    "start:client": "BROKEN - empty",
+    "start:client:debug": "BROKEN - empty",
+    "start:server": "run production server",
+    "start:server:debug": "build && run localhost server with HMR",
+    "build": "pnpm i && runs vite build on server code !!!! this is wrong, only vite for VueJS",
+    "start-db:cli": "CLI CONN to duckdb @ /root/Developer/database - abullard localhost only",
+    "clean": "del node_modules && distribution folder",
+    "test": "run vitest",
+    "test:coverage": "run vitest with coverage report"
   },
   "type": "commonjs",
   "dependencies": {
