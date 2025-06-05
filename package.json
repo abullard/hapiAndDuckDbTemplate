@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start:client": "",
+    "start:client": "npm --prefix ./src/client run dev",
     "start:client:debug": "",
     "start:server": "node ./dist/server/index.js",
     "start:server:debug": "npx nodemon -e ts --exec \"pnpm build; pnpm start:server\"",
@@ -14,7 +14,7 @@
     "test:coverage": "vitest run --coverage"
   },
   "scriptDescriptions": {
-    "start:client": "BROKEN - empty",
+    "start:client": "start vue server locally",
     "start:client:debug": "BROKEN - empty",
     "start:server": "run production server",
     "start:server:debug": "build && run localhost server with HMR",
